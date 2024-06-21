@@ -1,0 +1,17 @@
+<div>
+<div *ngIf="pdfViewer" style="height: calc(100vh - 20px); justify-content: center; display: flex; border: none;">  
+  <iframe [src]="pdfSrc" width="95%" height="150%"     
+    oncontextmenu="return false;">
+  </iframe>  
+</div>
+<div *ngIf="!pdfViewer">
+  <pdf-viewer [src]="blobUrl"
+            [render-text]="true"
+            [original-size]="false"
+            [show-borders]="true"            
+            [zoom]="0.9"
+            [show-all]="true"
+            class="ng2-pdf-viewer"            
+></pdf-viewer>
+</div>
+</div>

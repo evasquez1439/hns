@@ -1,0 +1,14 @@
+<mat-toolbar style="background-color: #005eb8;" color="primary">
+    <img class="logo-navbar" src="../../../../assets/img/Logo-Horizontal.png" alt="Logo pablo tobon">    
+    
+    <span class="example-spacer"></span>
+    <mat-icon style="    width: 4%; font-size: 150%; height: 50%;">account_circle</mat-icon>    
+    <div>
+      <p class="texto">Hola</p>
+      <p>{{nombreUsuario}}</p>
+    </div>
+    
+    <button routerLink="/logout" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon" (click)="local()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>

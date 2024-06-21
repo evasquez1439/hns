@@ -1,0 +1,159 @@
+<mat-drawer-container class="example-container" (contextmenu)="bloquearClickDerecho($event)">
+    <mat-drawer  #drawer mode="side" opened>
+        <div class="espacio">
+
+            <mat-toolbar style="justify-content: center;">
+                <h3 class="fuente-titulo">Asistente de búsqueda</h3>
+            </mat-toolbar>
+
+            <div class="drawer-content">
+                <div class="inputs">
+                    <mat-form-field>
+                        <mat-label>Identificador Único</mat-label>
+                        <input matInput type="number" placeholder="" (input)="onInputChangeI($event)"
+                            [(ngModel)]="datosFiltro.numeroHistoria" class="example-right-align">
+
+                        <button *ngIf="datosFiltro.numeroHistoria" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="limpiarInputHC()">
+                            <mat-icon>close</mat-icon>
+                        </button>
+
+                    </mat-form-field>
+                    <mat-form-field >
+                        <mat-label>Tipo de documento</mat-label>
+                        <mat-select required="" (selectionChange)="onDocumentoSelected($event)"
+                            [value]="tipoDocumentoInput">
+                            <mat-option>-- Clear --</mat-option>
+                            <mat-option value="CC">Cedula de ciudadania</mat-option>
+                            <mat-option value="TI">Tarjeta de identidad</mat-option>
+                            <mat-option value="RC">Registro civil</mat-option>
+                            <mat-option value="PA">Pasaporte</mat-option>
+                            <mat-option value="CE">Cedula de Extranjería</mat-option>
+                            <mat-option value="AS">Adulto sin Identificar</mat-option>
+                            <mat-option value="MS">Menor sin Identificar</mat-option>
+                            <mat-option value="NU">NU</mat-option>
+                            <mat-option value="O">Otro</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Numero de Identificación</mat-label>
+                        <input matInput type="text" placeholder="" (input)="onInputChange($event)"
+                            [(ngModel)]="datosFiltro.numeroDocumento">
+
+                        <button *ngIf="datosFiltro.numeroDocumento" matSuffix mat-icon-button aria-label="Clear"
+                            (click)="limpiarInputDocumento()">
+                            <mat-icon>close</mat-icon>
+                        </button>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Fecha inicial</mat-label>
+                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="dp" placeholder=""
+                            [(ngModel)]="startDate" (input)="onStartDateChange()" (focusout)="onStartDateChange()"
+                            matTooltip="{{mensaje}}">
+                        <mat-hint class="fuente-datepicker">Desde 11/08/2003</mat-hint>
+                        <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                        <mat-datepicker #dp>
+                            <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Cancelar</button>
+                                <button mat-raised-button color="primary" matDatepickerApply
+                                    (click)="onStartDateChange()">Aplicar</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field color="primary">
+                        <mat-label >Fecha final</mat-label>
+                        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker2" [formControl]="date"
+                            [(ngModel)]="endDate" (change)="onStartDateChange()" matTooltip="{{mensaje}}">
+                        <mat-hint class="fuente-datepicker">Hasta 31/01/2013</mat-hint>
+                        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                        <mat-datepicker #picker2 color="primary">
+                            <mat-datepicker-actions>
+                                <button mat-button matDatepickerCancel>Cancelar</button>
+                                <button mat-raised-button color="primary" matDatepickerApply
+                                    (click)="onStartDateChange()">Aplicar</button>
+                            </mat-datepicker-actions>
+                        </mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="buttons">
+                    <button mat-fab extended color="primary" (click)="limpiarVariables()" 
+                    style="background-color:#7dba00 ;">Limpiar</button>
+                    <button mat-fab extended color="primary" (click)="buscarPaciente() "
+                        [disabled]="buttonDisabled">Buscar</button>
+                </div>
+                <div class="checkbox">
+                    <mat-checkbox color="primary" style="padding: 15px;" (change)="handleChange($event)">
+                        <mat-label>Incluir informes de Ayudas Dx</mat-label>
+                    </mat-checkbox>
+                </div>
+            </div>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div>
+            <div style="display: flex; align-items:center; justify-content: space-between;">
+                <div>
+                <button mat-mini-fab matTooltip="Asistente de búsqueda" color="primary"
+                    aria-label="Example mini fab with a heart icon" (click)="drawer.toggle(); onToggle()">
+                    <mat-icon>{{formaDespliegue}}</mat-icon>
+                </button>
+            </div>
+                <div *ngIf="isAvalibleReport">
+                    <button mat-mini-fab matTooltip="GO BACK" color="accent" style="background-color: #7dba00;"
+                        aria-label="Example mini fab with a heart icon" (click)="botonBackList()">
+                        <mat-icon>low_priority</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div *ngIf="responseDatosDemo.code==='200' && isAvalible" class="matt-card">
+                <mat-grid-list cols="1" rowHeight="15:2" style=" margin: 20px;">
+                    <mat-grid-tile class="mat-tile">
+                        <mat-card class="contenido-card">
+                            <div>
+                                <mat-card-subtitle>Nombre </mat-card-subtitle>
+                                <p class="datos-demo-paciente"> {{ responseDatosDemo.data.nombresApellidos}} </p>
+                            </div>
+                            <div>
+                                <mat-card-subtitle>Tipo de identificación</mat-card-subtitle>
+                                <p class="datos-demo-paciente"> {{ responseDatosDemo.data.tipoDocumento}} </p>
+                            </div>
+                            <div>
+                                <mat-card-subtitle>Identificación</mat-card-subtitle>
+                                <p class="datos-demo-paciente">{{ responseDatosDemo.data.dni}}</p>
+                            </div>
+                            <div>
+                                <mat-card-subtitle>Identificador Único</mat-card-subtitle>
+                                <P class="datos-demo-paciente">{{ responseDatosDemo.data.numeroHistoria}}</P>
+                            </div>
+                            <div>
+                                <mat-card-subtitle>Fecha de nacimiento</mat-card-subtitle>
+                                <P class="datos-demo-paciente">{{ responseDatosDemo.data.fnacimiento}}</P>
+                            </div>
+
+                        </mat-card>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+            <div *ngIf="codigoDeRespuesta==='200' && isAvalible" class="matt-card">
+
+                <app-lista-episodios [styleLista]="styleLista" [datosIngresar]="datosFiltro" class="ubicacion-listas"
+                    (cambioSeleccionEpi)="onCambioSeleccion2($event)"> </app-lista-episodios>
+            </div>
+
+            <div *ngIf="codigoDeRespuesta==='200' && isAvalible && incluirInformes" class="matt-card">
+                <div>
+                    <app-lista-ayudasdx [datosFiltro]="datosFiltro" class="ubicacion-listas"
+                        (cambioSeleccion)="onCambioSeleccion1($event)"></app-lista-ayudasdx>
+                </div>
+            </div>
+        </div>
+        <div class="botonConsultar" *ngIf="codigoDeRespuesta==='200' && isAvalible">
+            <button mat-fab extended color="primary" (click)="getPdfHc()"
+                [disabled]="buttonConsultarDisabled">Consultar</button>
+        </div>
+        <div *ngIf="codigoDeRespuesta==='200' && isAvalibleReport">
+           <div class="spinerPdf"> <mat-spinner *ngIf="isLoading"></mat-spinner></div>
+            <app-historia-clinica [ngClass]="{'blur': isLoading}" (load)="onLoad()"></app-historia-clinica>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>

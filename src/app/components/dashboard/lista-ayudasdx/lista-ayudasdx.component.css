@@ -1,0 +1,37 @@
+.example-container {
+    height: auto;
+    overflow: auto;
+    max-height: 190px;
+  }
+  
+  table {
+    width: 100%;        
+  }
+
+  .mat-table .mat-row {
+    margin-bottom: 4px;
+  }
+
+  tr{
+    height: 1px;
+    font-size: 13px;
+  }
+  
+  .fuente-titulo{
+    display: flex;
+    /* align-content: center; */
+    justify-content: center;
+    font-family: Open Sans, ui-sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    color: rgb(68 68 68);
+    margin-top: 20px;                  
+  }
+
+
+  /* .fuente-titulo {
+    font-family: 'TuTipoDeFuente';
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(148, 147, 147);
+  } */

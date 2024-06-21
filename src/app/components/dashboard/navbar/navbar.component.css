@@ -1,0 +1,16 @@
+.logo-navbar{
+
+    width: 20%;
+    height: 300%;
+
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+
+.texto{
+    margin: 10px 0 1px;
+    text-align: center;    
+}

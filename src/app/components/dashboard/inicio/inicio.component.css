@@ -1,0 +1,156 @@
+.example-container {
+    /* display: flex;
+    justify-content: space-between;
+    align-items:flex-start;
+    flex-direction: column; */
+    width: 100%;
+    height: 90%;
+
+}
+
+.ubicacion-listas{
+    display: flex; justify-content: center;
+}
+
+.inputs {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px;
+
+}
+
+/* .espacio{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+} */
+
+.buttons {
+
+    display: flex;
+    justify-content: space-around;
+    padding: 5px;
+}
+
+
+
+mat-card {
+
+    width: 17em;
+
+    justify-content: center;
+
+    margin: 5px;
+    border-radius: 15px;
+    border: 1px solid rgb(0, 0, 255, 0.582);
+
+    align-items: center;
+
+    box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1),
+        0 0 0 2px rgb(190, 190, 190),
+        0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+
+}
+
+.contenido-card {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+mat-card-footer {
+    background-color: rgb(252, 252, 252);
+    padding: 10px;
+}
+
+mat-card-subtitle {
+    margin: 20px;
+    color: #3F51B5;
+    text-decoration-color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.mat-tile {
+    background-color: white;
+    border-radius: 15px;
+}
+
+.datos-demo-paciente {
+    display: flex;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.app-lista-epi {
+
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+}
+
+.matt-card {
+    margin-top: 20px;
+}
+
+.botonConsultar {
+
+    display: flex;
+    justify-content: end;
+    margin: 20px 30px;
+
+}
+
+.fuente-titulo {
+    display: flex;
+    justify-content: center;
+    font-family: Open Sans, ui-sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(101 101 101);
+}
+
+
+.example-right-align {
+    text-align: right;
+  }
+  
+  input.example-right-align::-webkit-outer-spin-button,
+  input.example-right-align::-webkit-inner-spin-button {
+    display: none;
+  }
+  
+  input.example-right-align {
+    -moz-appearance: textfield;
+  }
+
+
+  /* .drawer-content{
+    display: flex;
+    flex-direction: column;
+  } */
+
+  .fuente-datepicker{
+
+    color: #005eb8; 
+    font-size: medium;
+    margin-left: 15px;
+
+  }
+
+  
+.spinerPdf{
+    position: absolute; top: 50%; left: 50%;    
+}
+
+.blur {
+    filter: blur(5px); /* Puedes ajustar el valor de blur según desees */
+}
+
+  
+  

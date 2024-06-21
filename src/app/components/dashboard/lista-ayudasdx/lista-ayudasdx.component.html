@@ -1,0 +1,33 @@
+<section class="example-container mat-elevation-z8" tabindex="0" style="max-height: 410px; width: 95%;">    
+        <h1 class="fuente-titulo">LISTA DE INFORMES</h1>    
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox color="primary" (change)="$event ? toggleAllRows() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+                </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+                <mat-checkbox color="primary" (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)"
+                    [aria-label]="checkboxLabel(row)">
+                </mat-checkbox>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreEstudio">
+            <th mat-header-cell *matHeaderCellDef>ESTUDIO</th>
+            <td mat-cell *matCellDef="let element">{{ element.nombreEstudio }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaEstudio">
+            <th mat-header-cell *matHeaderCellDef>FECHA ESTUDIO</th>
+            <td mat-cell *matCellDef="let element">{{ element.fechaEstudio }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="selection.toggle(row)"></tr>
+    </table>
+    <!-- <button (click)="getReporteHC()">PDF</button> -->
+</section>

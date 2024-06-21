@@ -1,0 +1,4 @@
+.ng2-pdf-viewer{
+    border-radius: 20px;
+    width: 100%; height: calc(100vh - 120px); background-color: #d0d0d014;
+}
